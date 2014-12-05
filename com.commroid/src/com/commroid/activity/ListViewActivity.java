@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import android.widget.ListView;
+
 import com.android.volley.VolleyError;
 import com.commroid.BaseActivity;
 
 public  class ListViewActivity extends  BaseActivity{
 
+	private ListView listView;
+	private ArrayList<String> list;
+	
 	@Override
 	protected int setContentViewById() {
 		return 0;
