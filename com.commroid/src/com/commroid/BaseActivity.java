@@ -104,30 +104,15 @@ public abstract class BaseActivity extends Activity {
 	 * @param map
 	 * @method
 	 */
-	public void getJSONByVolleyGET(String url,Map<String,String> map) { 
+	public void getJSONByVolleyGET(String url,Map<String,String> map,Response.Listener<JSONObject> l1,Response.ErrorListener l2) { 
 		RequestQueue requestQueue = Volley.newRequestQueue(this); 
         show();
-        
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( 
         		Request.Method.GET,  
                 url,  
                 null, 
-                new Response.Listener<JSONObject>() { 
-                    @Override 
-                    public void onResponse(JSONObject response) { 
-                       dissMiss();
-                       onResponseSuccessString(response.toString());
-                       onResponseSuccessObject(response);
-                    }
-
-                },  
-                new Response.ErrorListener() { 
-                    @Override 
-                    public void onErrorResponse(VolleyError error) { 
-                    	dissMiss();
-                    	onResponseError(error);
-                    } 
-                }); 
+                l1,  
+                l2); 
         requestQueue.add(jsonObjectRequest); 
     } 
 	
@@ -140,7 +125,7 @@ public abstract class BaseActivity extends Activity {
 	
 	public void getJSONByVolleyPOST(String url,Map<String,String> map) { 
 		RequestQueue requestQueue = Volley.newRequestQueue(this); 
-        show();
+        
         JsonObjectPostRequest jsonObjectRequest = new JsonObjectPostRequest( 
                 url,  
                 new Response.Listener<JSONObject>() { 
